@@ -1,0 +1,25 @@
+.grid-wrapper{
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    justify-items: center;
+}
+
+.main-container{
+    grid-column: 2/3;
+    border: 1px solid black;
+    width: 100%;
+
+}
+
+.results-container{
+    width: 100%;
+    justify-content: center;
+}
+
+.movie-details{
+    border: 1px solid black;
+}
+
+.hidden{
+    display:none;
+}
