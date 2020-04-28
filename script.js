@@ -1,9 +1,14 @@
 let baseUrl = "http://www.omdbapi.com/?apikey=1f2cce92&";
-var doneTypingInterval = 2000;
+var doneTypingInterval = 1000;
 var typingTimer;   
 let resultsContainer = document.querySelector(".results-container");
 let search = document.querySelector("#search");
 
+const textDetails=document.querySelectorAll("div.movie-details span");
+
+const poster = document.querySelector("#poster");
+
+const more = document.querySelector("#more");
 
 search.addEventListener('keyup', function () {
     console.log("keyup")
@@ -17,45 +22,40 @@ search.addEventListener('keydown', function () {
     clearTimeout(typingTimer);
   });
 
+more.addEventListener('click', function () {
+    let plotSpan = document.querySelector("#plot-span");
+    var request = new XMLHttpRequest();
+	request.onreadystatechange = function() {
+        if(request.readyState === 4) {
+            let json = JSON.parse(request.responseText);
+            let fullPlot=json["Plot"];
+            plotSpan.innerText=fullPlot;
+        }
+    }
+    request.open('Get', `${baseUrl}t=${search.value}&plot=full`);
+    
+	request.send();
+})
+
 function showSearch(){
     console.log('searching!')
     var request = new XMLHttpRequest();
 	request.onreadystatechange = function() {
         if(request.readyState === 4) {
             resultsContainer.classList.remove("hidden");
-            resultsContainer.textContent='';
-            
             
             let json = JSON.parse(request.responseText);
-            let results = json["Search"];
-            for(let i=0;i<results.length;i++){
-                let result = results[i];
-
-                let movieDetails = document.createElement("div");
-                movieDetails.classList.add("movie-details");
-                
-                let title = document.createElement("h3");
-                title.innerText=result["Title"];
-                movieDetails.appendChild(title);
-                let year = document.createElement("p");
-                year.innerText=result["Year"];
-                movieDetails.appendChild(year);
-
-                let type = document.createElement("p");
-                type.innerText=result["Type"];
-                movieDetails.appendChild(type);
-
-                let img = document.createElement("img");
-                img.src=result["Poster"];
-                img.width="200";
-                movieDetails.appendChild(img);
-                resultsContainer.appendChild(movieDetails);
+            for(let i=0;i<textDetails.length;i++){
+                let currentElement = textDetails[i];
+                currentElement.innerText=json[Object.keys(json).find(key=>
+                    key.toLowerCase()===currentElement.parentElement.id.toLowerCase())];
+                poster.src=json["Poster"];
             }
         }
     }
     search = document.querySelector("#search");
-    console.log( `${baseUrl}s=${search.value}`);
-    request.open('Get', `${baseUrl}s=${search.value}`);
+    console.log( `${baseUrl}t=${search.value}`);
+    request.open('Get', `${baseUrl}t=${search.value}`);
     
 	request.send();
 
