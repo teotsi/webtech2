@@ -7,23 +7,35 @@
     <title>Search for movies!</title>
 </head>
 <body>
+    <header>
+        <div class="grid-wrapper">
+            <h1 id="name">OMDb</h1>
+            <div id="searchDiv">
+                <input type="search" name="search" id="search" placeholder="Search..">
+            </div>
+        </div>
+    </header>
     <div class="grid-wrapper">
         <div class="main-container">
-            <label for="search">Search</label>
-            <input type="search" name="search" id="search">
-            <h1>Results</h1>
-            <div class="results-container hidden">
-                <div class="movie-details">
-                    <h3 id="title"><span>Title</span></h3>
-                    <p id="year">Year: <span></span></p>
-                    <p id="type">Type: <span></span></p>
-                    <p id="actors">Actors: <span></span></p>
-                    <p id="released">Year: <span></span></p>
-                    <p id="imdbRating">IMDB Rating <span></span></p>
-                    <img id="poster" width=200 alt="poster">
+            <div class="movie-details results-container hidden">
+                <p id="title"><span>Title</span></p>
+                <div class="flex-container">
+                    <div class="mini-flex">
+                        <img id="poster" width=200 alt="poster">
+                        <p id="imdbRating" class="A"><span></span>/10</p>
+                    </div>
+                    
+                    <div class="data">
+                        <p id="imdbRating" class="B">IMDB Rating: <span></span></p>
+                        <p id="year">Year: <span></span></p>
+                        <p id="type">Type: <span></span></p>
+                        <p id="actors">Cast: <span></span></p>
+                        <p id="released">Year: <span></span></p>
+                    </div>
+                </div>
+                <div id="plot-container">
                     <p id="plot">Plot: <span id="plot-span"></span> </p>
                     <a id="more" href="#">Περισσότερα</a>
-
                 </div>
             </div>
         </div>
