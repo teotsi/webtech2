@@ -92,7 +92,8 @@ img{
     }
 
     img{
-        margin-left: 15px;
+        margin: auto;
+        box-shadow: 5px 4px 6px rgba(0, 0, 0, 0.4);
     }
 
     .grid-wrapper{
@@ -109,13 +110,15 @@ img{
     }
 
     .mini-flex{
-        display: flex;
+        display: block;
+        text-align: center;
     }
 
     .A{
         display: block;
-        font-size: 4rem;
-        margin: auto;
+        font-size: 2.5rem;
+        margin-top: 10px;
+        margin-bottom: 0;
     }
 
     .B{
@@ -123,7 +126,7 @@ img{
     }
 
     #title{
-        font-size: 2rem;
+        font-size: 3rem;
         text-align: center;
         font-weight: 500;
         margin: 20px;
