@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Profile Page</title>
+</head>
+<body>
+    <header>
+        <div class="grid-wrapper">
+            <h1 id="name">OMDb</h1>
+        </div>
+    </header>
+    <div class="grid-wrapper">
+        <div class="main-container">
+            <div class="flex-container tab">
+                <button class="tab-btn" id="profile-btn" onclick="openTab(event, 'profile-tab')">Profile</button>
+                <button class="tab-btn" id="bookmark-btn" onclick="openTab(event, 'bookmark-tab')">Bookmarks</button>
+            </div>
+            <div class="tabcontent" id="profile-tab">
+                <h1>Profile</h1>
+
+                <h3>Name</h3>
+                <h3>Email</h3>
+                
+            </div>
+            <div class="tabcontent" id="bookmark-tab">
+                <h1>Bookmark</h1>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
