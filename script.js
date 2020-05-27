@@ -49,8 +49,9 @@ function showSearch(){
                 let currentElement = textDetails[i];
                 currentElement.innerText=json[Object.keys(json).find(key=>
                     key.toLowerCase()===currentElement.parentElement.id.toLowerCase())];
-                poster.src=json["Poster"];
             }
+                            poster.src=json["Poster"];
+
         }
     }
     search = document.querySelector("#search");
@@ -73,12 +74,12 @@ function openTab(evt, tabName) {
     }
   
     // Get all elements with class="tablinks" and remove the class "active"
-    tablinks = document.getElementsByClassName("tablinks");
+    tablinks = document.getElementsByClassName("tablink");
     for (i = 0; i < tablinks.length; i++) {
       tablinks[i].className = tablinks[i].className.replace(" active", "");
     }
   
     // Show the current tab, and add an "active" class to the button that opened the tab
     document.getElementById(tabName).style.display = "block";
-    evt.currentTarget.className += " active";
+    evt.currentTarget.classList.toggle("active");
 }
