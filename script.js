@@ -4,7 +4,7 @@ var typingTimer;
 let resultsContainer = document.querySelector(".results-container");
 let search = document.querySelector("#search");
 
-const textDetails=document.querySelectorAll("div.movie-details span");
+const textDetails=document.querySelectorAll("div.movie-details span:not(.like-btn)");
 
 const poster = document.querySelector("#poster");
 
@@ -82,4 +82,19 @@ function openTab(evt, tabName) {
     // Show the current tab, and add an "active" class to the button that opened the tab
     document.getElementById(tabName).style.display = "block";
     evt.currentTarget.classList.toggle("active");
+}
+
+const whiteHeart = '\u2661';
+const blackHeart = '\u2665';
+const button = document.querySelector('.like-btn');
+
+function toggle() {
+  const like = button.textContent;
+  if(like==whiteHeart) {
+    button.textContent = blackHeart;
+    // add to bookmarked movies
+  } else {
+    button.textContent = whiteHeart;
+    // remove from bookmarked movies
+  }
 }

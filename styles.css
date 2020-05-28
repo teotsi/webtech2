@@ -9,6 +9,14 @@ header{
     margin-bottom: 20px;
 }
 
+#name{
+    padding-left: 10px;
+}
+
+#profile{
+    padding-right: 10px;
+}
+
 img{
     margin-left: 30px;
     border-radius: 10px;
@@ -21,6 +29,13 @@ img{
     font-weight: 500;
 }
 
+.grid-wrapperA{
+    display: grid;
+    grid-template-columns: 1fr 4fr 1fr;
+    justify-items: center;
+    width: 100%;
+}
+
 .grid-wrapper{
     display: grid;
     grid-template-columns: 1fr 4fr 1fr;
@@ -30,6 +45,7 @@ img{
 
 .flex-container{
     display: flex;
+    text-align: center;
 }
 
 .main-container{
@@ -43,6 +59,29 @@ img{
 .results-container{
     width: 100%;
     justify-content: center;
+}
+
+.plot-container{
+    text-align: justify ;
+}
+
+#rating-flex{
+    display: flex;
+    padding: auto;
+    justify-content: space-between;
+}
+
+.vertical-flex{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.like-btn{
+    font-size: 2.5rem;
+    text-decoration: none;
+    border: none;
+    background-color: transparent;
 }
 
 .hidden{
@@ -75,7 +114,7 @@ img{
 }
 
 #search{
-    width: 80%;
+    width: 70%;
     border: 3px solid #00B4CC;
     padding: 5px;
     height: 40px;
@@ -85,6 +124,18 @@ img{
     font-size: 1.2rem;
 }
 
+.link{
+    text-decoration: none;
+}
+
+.link:visited{
+    color: black;
+}
+
+.link:hover{
+    text-decoration: underline;
+    color: blue;
+}
 /* ////////////////////// Profile Page //////////////////////// */
 
 .tab{
@@ -111,14 +162,6 @@ img{
     background-color: rgb(133, 133, 133);
   }
   
- 
-
-
-.tab button:hover {
-    background-color: rgb(133, 133, 133);
-  }
-  
-
 
 .tabcontent {
     display: none;
@@ -183,6 +226,12 @@ img{
         text-align: center;
     }
 
+    #rating-flex{
+        display: flex;
+        padding: auto;
+        justify-content: space-evenly;
+    }
+
     .A{
         display: block;
         font-size: 2.5rem;
@@ -192,6 +241,7 @@ img{
 
     .B{
         display: none;
+        font-size: 2.5rem;
     }
 
     #title{

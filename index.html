@@ -8,11 +8,12 @@
 </head>
 <body>
     <header>
-        <div class="grid-wrapper">
-            <h1 id="name">OMDb</h1>
+        <div class="grid-wrapperA">
+            <h1 id="name"><a href="index.html"  class="link">OMDb</a></h1>
             <div id="searchDiv">
                 <input type="search" name="search" id="search" placeholder="Search..">
             </div>
+            <h1 id="profile"><a href="profile.html" class="link">Profile</a></h1>
         </div>
     </header>
     <div class="grid-wrapper">
@@ -22,11 +23,21 @@
                 <div class="flex-container">
                     <div class="mini-flex">
                         <img id="poster" width=200 alt="poster">
-                        <p id="imdbRating" class="A">&#x2605;<span></span>/10</p>
+                        <div id="rating-flex">
+                            <div>
+                                <p id="imdbRating" class="A">&#x2605;<span></span>/10</p>
+                            </div>
+                            <button class="like-btn A" onclick="toggle()">&#x2661;</button>
+                        </div>
                     </div>
                     
                     <div class="data">
-                        <p id="imdbRating" class="B">IMDB Rating: <span></span>/10</p>
+                        <div id="rating-flex">
+                            <div class="vertical-flex">
+                                <p id="imdbRating" class="B">IMDB Rating: <span></span>/10</p>
+                            </div>
+                            <button class="like-btn B" onclick="toggle()">&#x2661;</button>
+                        </div>
                         <p id="type">Type: <span></span></p>
                         <p id="actors">Cast: <span></span></p>
                         <p id="released">Year: <span></span></p>
@@ -35,7 +46,6 @@
                 <div id="plot-container">
                     <p id="plot">Plot: <span id="plot-span"></span> </p>
                     <a id="more" href="#">Περισσότερα</a>
-                    <a href="profile.html">Profile</a>
                 </div>
             </div>
         </div>
