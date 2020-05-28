@@ -102,14 +102,17 @@ img{
     text-decoration: none;
 }
 
-.tab button:hover {
-    background-color: rgb(214, 134, 134);
-  }
-  
  
 .tab button.active {
-    background-color: rgb(173, 173, 173);
+    background-color: rgb(133, 133, 133);
 }
+
+
+.tab button:hover {
+    background-color: rgb(133, 133, 133);
+  }
+  
+
 
 .tabcontent {
     display: none;
