@@ -3,27 +3,23 @@ package com.webtect.movieapi.Movie;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
-@RequiredArgsConstructor
 @RestController
-@RequestMapping("/movie")
+@RequiredArgsConstructor
 public class MovieController {
 
     private final MovieService service;
 
-    @GetMapping("")
-    public List<Movie> getMovies() {
-        return service.getMovies();
+    @GetMapping("/user/{userId}/movies")
+    public List<Movie> getMoviesById(@PathVariable(value = "userId") String userId) {
+        return service.findByUserId(userId);
     }
 
-    @PostMapping("")
-    public void saveMovie(@RequestBody Movie movie) {
-        service.saveMovie(movie);
-    }
-
-    @GetMapping("/{id}")
-    public Movie getMovies(@PathVariable String id) {
-        return service.getMovie(id);
+    @PutMapping("/user/{userId}/movies")
+    public List<Movie> saveMovie(@PathVariable(value = "userId") String userId, @RequestBody Movie movie, Principal principal) {
+        service.saveMovie(movie, principal);
+        return service.findByUserId(userId);
     }
 }

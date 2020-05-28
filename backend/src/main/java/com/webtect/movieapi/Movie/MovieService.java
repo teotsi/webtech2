@@ -1,24 +1,29 @@
 package com.webtect.movieapi.Movie;
 
+import com.webtect.movieapi.User.User;
+import com.webtect.movieapi.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
 
+import java.security.Principal;
 import java.util.List;
+
 
 @Service
 @RequiredArgsConstructor
 public class MovieService {
-    private final MovieRepository movieRepository;
 
-    public List<Movie> getMovies(){
-        return this.movieRepository.findAll();
+    private final MovieRepository repository;
+
+
+    public List<Movie> findByUserId(String userId) {
+        return repository.findByUserId(userId);
     }
 
-    public Movie getMovie(String id){
-        return this.movieRepository.findById(id).orElseThrow(MovieNotFoundException::new);
+    public void saveMovie(Movie movie, Principal principal){
+        movie.setUser(((UserDetailsImpl) ((UsernamePasswordAuthenticationToken) principal).getPrincipal()).getUser());
+        repository.save(movie);
     }
 
-    public void saveMovie(Movie movie){
-        movieRepository.save(movie);
-    }
 }

@@ -49,8 +49,9 @@ function showSearch(){
                 let currentElement = textDetails[i];
                 currentElement.innerText=json[Object.keys(json).find(key=>
                     key.toLowerCase()===currentElement.parentElement.id.toLowerCase())];
-                poster.src=json["Poster"];
             }
+                            poster.src=json["Poster"];
+
         }
     }
     search = document.querySelector("#search");
