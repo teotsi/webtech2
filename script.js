@@ -84,8 +84,8 @@ function openTab(evt, tabName) {
     evt.currentTarget.classList.toggle("active");
 }
 
-const whiteHeart = '\u2661';
-const blackHeart = '\u2665';
+const whiteHeart = 'Save \u2661';
+const blackHeart = 'Saved \u2665';
 const button = document.querySelector('.like-btn');
 
 function toggle() {
