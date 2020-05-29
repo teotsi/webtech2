@@ -1,4 +1,4 @@
-package com.webtect.movieapi;
+package com.webtect.movieapi.User;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.webtect.movieapi.User.User;
@@ -44,6 +44,7 @@ public class UserDetailsImpl implements UserDetails {
     }
 
     @Override
+    @JsonIgnore
     public String getPassword() {
         return password;
     }
