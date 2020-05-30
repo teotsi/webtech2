@@ -1,21 +1,18 @@
-package com.webtect.movieapi;
+package com.webtect.movieapi.User;
 
-import com.webtect.movieapi.User.User;
-import com.webtect.movieapi.User.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class UserDetailServiceImpl implements UserDetailsService {
 
-    @Autowired
-    UserRepository userRepository;
+    private final UserRepository userRepository;
 
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
@@ -23,5 +20,12 @@ public class UserDetailServiceImpl implements UserDetailsService {
         Optional<User> user = userRepository.findByEmail(s);
         user.orElseThrow(() -> new UsernameNotFoundException("Not found: " + s));
         return user.map(UserDetailsImpl::new).get();
+    }
+
+    public UserDetails registerUser(User user) {
+        user.setActive(true);
+        user.setRoles("ROLE_USER");
+        userRepository.save(user);
+        return new UserDetailsImpl(user);
     }
 }

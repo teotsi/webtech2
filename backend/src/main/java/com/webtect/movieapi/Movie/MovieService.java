@@ -1,7 +1,6 @@
 package com.webtect.movieapi.Movie;
 
-import com.webtect.movieapi.User.User;
-import com.webtect.movieapi.UserDetailsImpl;
+import com.webtect.movieapi.User.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
