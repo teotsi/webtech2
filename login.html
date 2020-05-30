@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Login Page</title>
+</head>
+<body>
+    <header>
+        <div class="grid-wrapper">
+            <h1 id="name">OMDb</h1>
+        </div>
+    </header>
+    <div class="grid-wrapper">
+        <h1 style="grid-column: 2/3; margin-bottom: 40px; text-align: center;">Search any movie or series you want!</h1>
+        <div class="main-container">
+            <div class="flex-container tab">
+                <button class="tab-btn tablink" id="login-btn" onclick="openTab(event, 'login-tab')">Login</button>
+                <button class="tab-btn tablink" id="create-acnt-btn" onclick="openTab(event, 'create-acnt-tab')">Create Account</button>
+            </div>
+            <div class="tabcontent" id="login-tab">
+                <h1 style="margin-bottom: 40px;">Login</h1>    
+                
+                <!-- Inputs
+                Email
+                Password -->
+                <input type="email" id="email-input" placeholder="Email"> <br><br>
+                <input type="password" id="pass-input" placeholder="Password"> <br><br>
+                <button id="submit-btn">Login</button>
+
+            </div>
+            <div class="tabcontent" id="create-acnt-tab">
+                <h1>Create An Account</h1>
+
+                <!-- Inputs
+                Email
+                Password 
+                Repeat Password-->
+                <input type="email" id="email-input" placeholder="Email"> <br><br>
+                <input type="password" id="pass-input" placeholder="Password"> <br><br>
+                <input type="password" id="pass-input" placeholder="Repeat Password"> <br><br>
+                <button id="submit-btn">Create</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -84,6 +84,14 @@ img{
     background-color: transparent;
 }
 
+.like-btn:hover{
+    cursor: pointer;
+}
+
+.like-btn:focus{
+    outline: none;
+}
+
 .hidden{
     display:none;
 }
@@ -173,8 +181,7 @@ img{
 
 .tabcontent {
     display: none;
-    padding: 6px 12px;
-
+    padding: 30px;
     border-top: none;
 }
 
@@ -193,6 +200,52 @@ img{
     border-top-right-radius: 15px;
     border-left: 1px solid black;
     border-bottom: 1px solid black;
+}
+
+#login-btn{
+    border-top-left-radius: 15px;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+}
+
+#create-acnt-btn{
+    border-top-right-radius: 15px;
+    border-left: 1px solid black;
+    border-bottom: 1px solid black;
+}
+
+#email-input{
+   border: none;
+   border-bottom: 2px solid gray;
+   font-size: 1.25rem;
+   outline: none;
+   margin-bottom: 10px;
+}
+
+#pass-input{
+   border: none;
+   border-bottom: 2px solid gray;
+   font-size: 1.25rem;
+   outline: none;
+   margin-bottom: 10px;
+}
+
+#submit-btn{
+    outline: none;
+    border: none;
+    background-color: transparent;
+    border: 2px solid black;
+    border-radius: 10px;
+    width: 100px;
+    height: 40px;
+    font-size: 1.05rem;
+    transition: ease-in-out .3s;
+}
+
+#submit-btn:hover{
+    transition: ease-in-out .15s;
+    background-color: black;
+    color: white;
 }
 /* //////////////////////////////////////////////////////////// */
 
