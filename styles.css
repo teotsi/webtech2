@@ -214,7 +214,7 @@ img{
     border-bottom: 1px solid black;
 }
 
-#email-input{
+.email-input{
    border: none;
    border-bottom: 2px solid gray;
    font-size: 1.25rem;
@@ -222,7 +222,7 @@ img{
    margin-bottom: 10px;
 }
 
-#pass-input{
+.pass-input{
    border: none;
    border-bottom: 2px solid gray;
    font-size: 1.25rem;

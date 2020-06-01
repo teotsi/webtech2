@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
     <title>Login Page</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
     <header>
@@ -25,21 +26,20 @@
                 <!-- Inputs
                 Email
                 Password -->
-                <input type="email" id="email-input" placeholder="Email"> <br><br>
-                <input type="password" id="pass-input" placeholder="Password"> <br><br>
-                <button id="submit-btn">Login</button>
+                <input type="email" class="email-input" placeholder="Email"> <br><br>
+                <input type="password" class="pass-input" placeholder="Password"> <br><br>
+                <button id="submit-btn" onclick="logIn()">Login</button>
 
             </div>
             <div class="tabcontent" id="create-acnt-tab">
                 <h1>Create An Account</h1>
-
                 <!-- Inputs
                 Email
                 Password 
                 Repeat Password-->
-                <input type="email" id="email-input" placeholder="Email"> <br><br>
-                <input type="password" id="pass-input" placeholder="Password"> <br><br>
-                <input type="password" id="pass-input" placeholder="Repeat Password"> <br><br>
+                <input type="email" class="email-input" placeholder="Email"> <br><br>
+                <input type="password" class="pass-input" placeholder="Password"> <br><br>
+                <input type="password" class="pass-input" placeholder="Repeat Password"> <br><br>
                 <button id="submit-btn">Create</button>
             </div>
         </div>

@@ -63,6 +63,38 @@ function showSearch(){
    
 }
 
+
+function logIn(){
+  console.log("logIN")
+  var formData = new FormData();
+
+  formData.append("username", "teotsi@gmail.com");
+  formData.append("password", "pass"); 
+
+  $.ajax({
+    url:'http://localhost:8080/login',
+    data:FormData,
+    processData: false,
+    type:'POST',
+    xhrFields: {withCredentials: true},
+    success: function(data){
+      alert(data);
+    }
+  });
+  // var request = new XMLHttpRequest();
+  // request.withCredentials = true;
+
+  // request.onreadystatechange = function() {
+  //   console.log("hey");
+  //   if(request.readyState === 4) {
+  //     console.log(request);          
+  //   }
+    
+  // }
+  // request.open('POST', 'http://localhost:8080/login');
+  // request.send(formData);
+}
+
 function openTab(evt, tabName) {
     // Declare all variables
     var i, tabcontent, tablinks;
