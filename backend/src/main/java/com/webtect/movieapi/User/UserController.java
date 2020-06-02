@@ -20,6 +20,15 @@ public class UserController {
         return id.equals(currentUser.getId()) ? currentUser : new UserDetailsImpl();
     }
 
+    @GetMapping("/user/me")
+    public UserDetails getLoggedInUser(Principal principal) {
+        if (principal != null) {
+            return (UserDetailsImpl) ((UsernamePasswordAuthenticationToken) principal).getPrincipal();
+        } else {
+            return new UserDetailsImpl();
+        }
+    }
+
     @PutMapping("/user/")
     public UserDetails registerUser(@RequestBody User user) {
         return userDetailService.registerUser(user);

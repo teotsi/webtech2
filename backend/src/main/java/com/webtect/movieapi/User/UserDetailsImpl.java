@@ -23,6 +23,8 @@ public class UserDetailsImpl implements UserDetails {
     private String email;
     private String password;
     private boolean active;
+
+    @JsonIgnore
     private List<GrantedAuthority> authorities;
     @JsonIgnore
     private User user;

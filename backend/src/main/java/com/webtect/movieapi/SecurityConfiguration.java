@@ -37,6 +37,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.addFilterBefore(corsFilter, ChannelProcessingFilter.class).csrf().disable().authorizeRequests()
                 .antMatchers("/user/").permitAll()
+                .antMatchers("/user/me").permitAll()
                 .antMatchers("/user/**").hasRole("USER")
                 .and().formLogin().successHandler(new AuthenticationSuccessHandler() {
             @Override

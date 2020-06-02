@@ -14,17 +14,20 @@ import javax.validation.constraints.NotNull;
 @Setter
 @Table(name = "user", schema = "public")
 public class User {
-    @Id @GeneratedValue(generator="system-uuid")
-    @GenericGenerator(name="system-uuid", strategy = "uuid")
+    @Id
+    @GeneratedValue(generator = "system-uuid")
+    @GenericGenerator(name = "system-uuid", strategy = "uuid")
     private String id;
 
     @NotNull
+    @Column(unique = true)
     private String email;
 
     @NotNull
-
     private String password;
+
     private boolean active;
+
     private String roles;
 
     @JsonIgnore
