@@ -1,9 +1,11 @@
 package com.webtect.movieapi.User;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.security.Principal;
 
@@ -25,7 +27,7 @@ public class UserController {
         if (principal != null) {
             return (UserDetailsImpl) ((UsernamePasswordAuthenticationToken) principal).getPrincipal();
         } else {
-            return new UserDetailsImpl();
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "You need to log in");
         }
     }
 

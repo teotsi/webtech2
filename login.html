@@ -26,9 +26,12 @@
                 <!-- Inputs
                 Email
                 Password -->
-                <input type="email" class="email-input" placeholder="Email"> <br><br>
-                <input type="password" class="pass-input" placeholder="Password"> <br><br>
-                <button id="submit-btn" onclick="logIn()">Login</button>
+                <div id="login-form">
+                    <input id="login-email" type="email" class="email-input" name="username" placeholder="Email"> <br><br>
+                    <input id="login-password" type="password" name="password" class="pass-input" placeholder="Password"> <br><br>
+                    <button id="login-submit-btn" onclick="logIn()" type="submit">Login</button>
+                </div>
+               
 
             </div>
             <div class="tabcontent" id="create-acnt-tab">
@@ -37,10 +40,10 @@
                 Email
                 Password 
                 Repeat Password-->
-                <input type="email" class="email-input" placeholder="Email"> <br><br>
-                <input type="password" class="pass-input" placeholder="Password"> <br><br>
+                <input type="email" id="register-email" class="email-input" placeholder="Email"> <br><br>
+                <input type="password" id="register-password" class="pass-input" placeholder="Password"> <br><br>
                 <input type="password" class="pass-input" placeholder="Repeat Password"> <br><br>
-                <button id="submit-btn">Create</button>
+                <button id="submit-btn" onclick="register()">Create</button>
             </div>
         </div>
     </div>

@@ -4,6 +4,8 @@ var typingTimer;
 let resultsContainer = document.querySelector(".results-container");
 let search = document.querySelector("#search");
 
+let test = true
+
 const textDetails=document.querySelectorAll("div.movie-details span:not(.like-btn)");
 
 const poster = document.querySelector("#poster");
@@ -63,36 +65,46 @@ function showSearch(){
    
 }
 
-
-function logIn(){
-  console.log("logIN")
-  var formData = new FormData();
-
-  formData.append("username", "teotsi@gmail.com");
-  formData.append("password", "pass"); 
-
-  $.ajax({
-    url:'http://localhost:8080/login',
-    data:FormData,
-    processData: false,
-    type:'POST',
-    xhrFields: {withCredentials: true},
-    success: function(data){
-      alert(data);
+function logIn(username, password){
+  const request = new XMLHttpRequest();
+  request.onload = () =>{
+    if(request.status == 200){
+      location.href = "index.html";
     }
-  });
-  // var request = new XMLHttpRequest();
-  // request.withCredentials = true;
+    console.log(request.responseText);
+  }
 
-  // request.onreadystatechange = function() {
-  //   console.log("hey");
-  //   if(request.readyState === 4) {
-  //     console.log(request);          
-  //   }
-    
-  // }
-  // request.open('POST', 'http://localhost:8080/login');
-  // request.send(formData);
+  if(!(username  || password)){
+      username = document.querySelector('#login-email').value;
+      password = document.querySelector('#login-password').value;
+  }
+  let formEncoded = `username=${username}&password=${password}`;
+  request.open('post','http://localhost:8080/login');
+  request.withCredentials = true;
+  request.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+  request.send(formEncoded);
+}
+
+function register(){
+  const request = new XMLHttpRequest();
+  request.onload = () =>{
+    if(request.status == 200){
+      logIn(email, password)
+    }
+    console.log(request.responseText);
+  }
+
+  let email = document.querySelector('#register-email').value;
+  let password = document.querySelector('#register-password').value;
+
+  let registerData = {
+    "email":email,
+    "password":password
+  }
+  
+  request.open('put','http://localhost:8080/user/');
+  request.setRequestHeader("Content-Type", "application/json");
+  request.send(JSON.stringify(registerData));
 }
 
 function openTab(evt, tabName) {
@@ -116,11 +128,13 @@ function openTab(evt, tabName) {
     evt.currentTarget.classList.toggle("active");
 }
 
-const whiteHeart = 'Save \u2661';
-const blackHeart = 'Saved \u2665';
-const button = document.querySelector('.like-btn');
+
 
 function toggle() {
+  test = !test;
+  const whiteHeart = 'Save \u2661';
+const blackHeart = 'Saved \u2665';
+const button = document.querySelector('.like-btn');
   const like = button.textContent;
   if(like==whiteHeart) {
     button.textContent = blackHeart;

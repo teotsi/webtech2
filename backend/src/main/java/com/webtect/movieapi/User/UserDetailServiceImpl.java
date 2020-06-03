@@ -24,6 +24,7 @@ public class UserDetailServiceImpl implements UserDetailsService {
 
     public UserDetails registerUser(User user) {
         user.setActive(true);
+        user.setPassword(CustomPasswordEncoder.getPasswordEncoder().encode(user.getPassword()));
         user.setRoles("ROLE_USER");
         userRepository.save(user);
         return new UserDetailsImpl(user);
