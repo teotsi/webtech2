@@ -108,6 +108,14 @@ function register(){
   request.send(JSON.stringify(registerData));
 }
 
+function setEmailInProfile(){
+  console.log("heueopeoe");
+  getLoggedInUser().then(value=>{
+    let email_header = document.getElementById("email_header")
+    email_header.innerHTML = "Email: " + value.email;
+  })
+}
+
 function putMovie(){
   const request = new XMLHttpRequest();
   request.onload = () =>{

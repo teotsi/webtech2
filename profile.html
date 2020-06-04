@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="styles.css">
     <title>Profile Page</title>
 </head>
-<body>
+<body onload="setEmailInProfile()">
     <script src="logInScript.js"></script>
     <header>
         <div class="grid-wrapper">
@@ -21,9 +21,7 @@
             </div>
             <div class="tabcontent" id="profile-tab">
                 <h1>Profile</h1>
-
-                <h3>Name</h3>
-                <h3>Email</h3>
+                <h3 id="email_header">Email</h3>
                 
             </div>
             <div class="tabcontent" id="bookmark-tab">
