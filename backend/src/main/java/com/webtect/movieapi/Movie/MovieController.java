@@ -18,8 +18,7 @@ public class MovieController {
     }
 
     @PutMapping("/user/{userId}/movies")
-    public List<Movie> saveMovie(@PathVariable(value = "userId") String userId, @RequestBody Movie movie, Principal principal) {
-        service.saveMovie(movie, principal);
-        return service.findByUserId(userId);
+    public void saveMovie(@PathVariable(value = "userId") String userId, @RequestBody Movie movie, Principal principal) {
+         service.saveMovie(userId, movie, principal);
     }
 }
