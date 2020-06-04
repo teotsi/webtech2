@@ -13,12 +13,14 @@ import javax.persistence.*;
 @Table(name = "movie", schema = "public")
 @Getter
 @Setter
+@IdClass(MovieId.class)
 public class Movie {
 
     @Id
     private String id;
     private String poster;
 
+    @Id
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)

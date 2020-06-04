@@ -16,7 +16,7 @@ import javax.validation.constraints.NotNull;
 public class User {
     @Id
     @GeneratedValue(generator = "system-uuid")
-    @GenericGenerator(name = "system-uuid", strategy = "uuid")
+    @GenericGenerator(name = "system-uuid", strategy = "org.hibernate.id.UUIDGenerator")
     private String id;
 
     @NotNull
@@ -26,8 +26,10 @@ public class User {
     @NotNull
     private String password;
 
+    @JsonIgnore
     private boolean active;
 
+    @JsonIgnore
     private String roles;
 
     @JsonIgnore
