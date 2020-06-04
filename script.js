@@ -3,17 +3,18 @@ var doneTypingInterval = 1000;
 var typingTimer;   
 let resultsContainer = document.querySelector(".results-container");
 let search = document.querySelector("#search");
-
-let test = true
-
+let searchResults = {};
 const textDetails=document.querySelectorAll("div.movie-details span:not(.like-btn)");
-
 const poster = document.querySelector("#poster");
 
+let loggedInUser;
+getLoggedInUser().then(value=>{
+  loggedInUser = value;
+})
+console.log(loggedInUser)
 const more = document.querySelector("#more");
 
 search.addEventListener('keyup', function () {
-    console.log("keyup")
     clearTimeout(typingTimer);
     typingTimer = setTimeout(showSearch, doneTypingInterval);
     
@@ -29,7 +30,7 @@ more.addEventListener('click', function () {
     var request = new XMLHttpRequest();
 	request.onreadystatechange = function() {
         if(request.readyState === 4) {
-            let json = JSON.parse(request.responseText);
+            json = JSON.parse(request.responseText);
             let fullPlot=json["Plot"];
             plotSpan.innerText=fullPlot;
         }
@@ -46,13 +47,13 @@ function showSearch(){
         if(request.readyState === 4) {
             resultsContainer.classList.remove("hidden");
             
-            let json = JSON.parse(request.responseText);
+            searchResults = JSON.parse(request.responseText);
             for(let i=0;i<textDetails.length;i++){
                 let currentElement = textDetails[i];
-                currentElement.innerText=json[Object.keys(json).find(key=>
+                currentElement.innerText=searchResults[Object.keys(searchResults).find(key=>
                     key.toLowerCase()===currentElement.parentElement.id.toLowerCase())];
             }
-                            poster.src=json["Poster"];
+                            poster.src=searchResults["Poster"];
 
         }
     }
@@ -107,6 +108,23 @@ function register(){
   request.send(JSON.stringify(registerData));
 }
 
+function putMovie(){
+  const request = new XMLHttpRequest();
+  request.onload = () =>{
+    console.log(request.responseText);
+  }
+
+
+  let movieData = {
+    "id": searchResults['imdbID']
+  }
+  
+  request.open('put',`http://localhost:8080/user/${loggedInUser['id']}/movies` );
+  request.withCredentials = true;
+  request.setRequestHeader("Content-Type", "application/json");
+  request.send(JSON.stringify(movieData));
+}
+
 function openTab(evt, tabName) {
     // Declare all variables
     var i, tabcontent, tablinks;
@@ -131,9 +149,9 @@ function openTab(evt, tabName) {
 
 
 function toggle() {
-  test = !test;
   const whiteHeart = 'Save \u2661';
 const blackHeart = 'Saved \u2665';
+putMovie();
 const button = document.querySelector('.like-btn');
   const like = button.textContent;
   if(like==whiteHeart) {
