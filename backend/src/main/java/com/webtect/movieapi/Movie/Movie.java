@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import org.springframework.hateoas.RepresentationModel;
 
 import javax.persistence.*;
 
@@ -14,7 +15,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @IdClass(MovieId.class)
-public class Movie {
+public class Movie extends RepresentationModel<Movie> {
 
     @Id
     private String id;

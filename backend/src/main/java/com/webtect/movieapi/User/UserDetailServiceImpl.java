@@ -32,6 +32,7 @@ public class UserDetailServiceImpl implements UserDetailsService {
         user.setActive(true);
         user.setPassword(CustomPasswordEncoder.getPasswordEncoder().encode(user.getPassword()));
         user.setRoles("ROLE_USER");
+
         userRepository.save(user);
         return new UserDetailsImpl(user);
     }
