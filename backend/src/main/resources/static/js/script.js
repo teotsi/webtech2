@@ -117,7 +117,7 @@ function logIn(username, password) {
     body: formEncoded
   }).then(response => {
     if (response.status == 200) {
-      location.href = "index.html";
+      location.href = "/";
     } else {
       let email = document.querySelector('#login-email');
       email.parentElement.querySelector(':scope .feedback').classList.toggle("hidden");
@@ -226,7 +226,7 @@ function toggle(id) {
       removeMovie(id);
     }
   } else {
-    location.href = "login.html"
+    location.href = "/login/"
   }
 
 }

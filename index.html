@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,13 +8,14 @@
     <title>Search for movies!</title>
     <script src="profileScript.js"></script>
 </head>
+
 <body>
-    <script src="logInScript.js"></script>
+    <script src="authScript.js"></script>
     <header>
         <div class="grid-wrapperA">
-            <h1 id="name"><a href="index.html"  class="link">OMDb</a></h1>
+            <h1 id="name"><a href="index.html" class="link">OMDb</a></h1>
             <div id="searchDiv">
-                <input type="search" name="search" id="search" placeholder="Search...">
+                <input autocomplete="off" type="search" name="search" id="search" placeholder="Search...">
             </div>
             <h1 id="profile"><a href="profile.html" class="link">Profile</a></h1>
         </div>
@@ -24,9 +26,9 @@
                 <p id="title"><span>Title</span></p>
                 <div class="flex-container">
                     <div class="mini-flex">
-                        <img id="poster" width=200 alt="poster">
+                        <img id="poster" width=200 alt="poster" onerror="if (this.src != 'no-image.jpg') this.src = 'no-image.jpg';">
                     </div>
-                    
+
                     <div class="data">
                         <div id="rating-flex">
                             <div>
@@ -40,14 +42,15 @@
                     </div>
                 </div>
                 <div id="plot-container">
-                    <p id="plot">Plot: <span id="plot-span"></span> </p>
-                    <a id="more" onclick="showMore()" href="#">More</a>
+                    <p id="plot">Plot: <span id="plot-span"></span><span id="full-plot-span" class="hidden"></span></p>
+                    <a id="more" onclick="toggleMore(this)" href="#">More</a>
                 </div>
             </div>
         </div>
-        
+
     </div>
 
     <script src="script.js"></script>
 </body>
+
 </html>

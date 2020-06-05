@@ -5,7 +5,7 @@ function loadData() {
             console.log(response);
             if (response.status) {
                 console.log(response);
-                location.href = "login.html"
+                location.href = "/login/"
             } else {
                 setEmailInProfile();
                 setBookmarks();
