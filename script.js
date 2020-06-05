@@ -10,8 +10,9 @@ const poster = document.querySelector("#poster");
 let loggedInUser;
 getLoggedInUser().then(value=>{
   loggedInUser = value;
-})
-console.log(loggedInUser)
+
+});
+
 const more = document.querySelector("#more");
 
 search.addEventListener('keyup', function () {
@@ -21,47 +22,65 @@ search.addEventListener('keyup', function () {
 });
 
 search.addEventListener('keydown', function () {
-    console.log("keydown")
     clearTimeout(typingTimer);
   });
 
-more.addEventListener('click', function () {
-    let plotSpan = document.querySelector("#plot-span");
-    var request = new XMLHttpRequest();
-	request.onreadystatechange = function() {
-        if(request.readyState === 4) {
-            json = JSON.parse(request.responseText);
-            let fullPlot=json["Plot"];
-            plotSpan.innerText=fullPlot;
-        }
-    }
-    request.open('Get', `${baseUrl}t=${search.value}&plot=full`);
-    
-	request.send();
-})
+
+function showMore(element, title){
+  let plotSpan;
+  if(!title){
+    title = search.value;
+    plotSpan = document.querySelector("#plot-span");
+  }else{
+    plotSpan = element.parentElement.querySelector("#plot-span");
+    console.log(plotSpan);
+  }
+
+  var request = new XMLHttpRequest();
+  request.onreadystatechange = function() {
+      if(request.readyState === 4) {
+          json = JSON.parse(request.responseText);
+          let fullPlot=json["Plot"];
+          plotSpan.innerText=fullPlot;
+      }
+  }
+  request.open('Get', `${baseUrl}t=${title}&plot=full`);
+  request.send();
+}
 
 function showSearch(){
     console.log('searching!')
     var request = new XMLHttpRequest();
-	request.onreadystatechange = function() {
-        if(request.readyState === 4) {
-            resultsContainer.classList.remove("hidden");
-            
-            searchResults = JSON.parse(request.responseText);
-            for(let i=0;i<textDetails.length;i++){
-                let currentElement = textDetails[i];
-                currentElement.innerText=searchResults[Object.keys(searchResults).find(key=>
-                    key.toLowerCase()===currentElement.parentElement.id.toLowerCase())];
-            }
-                            poster.src=searchResults["Poster"];
+    fetch(`${baseUrl}t=${search.value}`)
+    .then(response=>response.json())
+    .then(data=>{
+      resultsContainer.classList.remove("hidden");      
+      searchResults =data;
+      for(let i=0;i<textDetails.length;i++){
+          let currentElement = textDetails[i];
+          currentElement.innerText=searchResults[Object.keys(searchResults).find(key=>
+              key.toLowerCase()===currentElement.parentElement.id.toLowerCase())];
+      }
+      poster.src=searchResults["Poster"];
+      
+      if(loggedInUser){
+        let button = document.querySelector('.like-btn');
+        getMovie(`${loggedInUser['links'][1]['href']}/${searchResults['imdbID']}`)
+          .then(response =>{
+            if(response.status!==404){
+              button.textContent = 'Saved \u2665';
+            }else{
+              console.log(response.status)
 
-        }
-    }
+              button.textContent = 'Save \u2661';
+
+            }
+          });
+      }
+    });
+	
     search = document.querySelector("#search");
     console.log( `${baseUrl}t=${search.value}`);
-    request.open('Get', `${baseUrl}t=${search.value}`);
-    
-	request.send();
 
    
 }
@@ -108,14 +127,6 @@ function register(){
   request.send(JSON.stringify(registerData));
 }
 
-function setEmailInProfile(){
-  console.log("heueopeoe");
-  getLoggedInUser().then(value=>{
-    let email_header = document.getElementById("email_header")
-    email_header.innerHTML = "Email: " + value.email;
-  })
-}
-
 function putMovie(){
   const request = new XMLHttpRequest();
   request.onload = () =>{
@@ -124,7 +135,8 @@ function putMovie(){
 
 
   let movieData = {
-    "id": searchResults['imdbID']
+    "id": searchResults['imdbID'],
+    "poster":searchResults['Poster']
   }
   
   request.open('put',`http://localhost:8080/user/${loggedInUser['id']}/movies` );
@@ -132,6 +144,16 @@ function putMovie(){
   request.setRequestHeader("Content-Type", "application/json");
   request.send(JSON.stringify(movieData));
 }
+
+async function removeMovie(id=searchResults['imdbID']){
+  let link = loggedInUser['links'][1]
+  console.log(`${link['href']}/${id}`);
+  const response = await fetch(`${link['href']}/${id}`,{
+    credentials: 'include',
+    method:'DELETE'
+     });
+    
+    }
 
 function openTab(evt, tabName) {
     // Declare all variables
@@ -156,17 +178,21 @@ function openTab(evt, tabName) {
 
 
 
-function toggle() {
+function toggle(id) {
   const whiteHeart = 'Save \u2661';
 const blackHeart = 'Saved \u2665';
-putMovie();
-const button = document.querySelector('.like-btn');
+let button;
+if(id){
+   button = document.querySelector(`[id$="${id}"]`);
+}else{
+  button = document.querySelector('.like-btn');
+}
   const like = button.textContent;
   if(like==whiteHeart) {
     button.textContent = blackHeart;
-    // add to bookmarked movies
+    putMovie();
   } else {
     button.textContent = whiteHeart;
-    // remove from bookmarked movies
+    removeMovie(id);
   }
 }

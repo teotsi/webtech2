@@ -29,6 +29,12 @@ img{
     font-weight: 500;
 }
 
+[id^='more-']:hover{
+    cursor: pointer;
+    color: blue;
+    text-decoration: underline;
+}
+
 .grid-wrapperA{
     display: grid;
     grid-template-columns: 1fr 4fr 1fr;

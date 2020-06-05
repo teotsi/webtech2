@@ -1,0 +1,64 @@
+function loadData(){
+    setEmailInProfile();
+    setBookmarks();
+}
+
+function setEmailInProfile(){
+    console.log("heueopeoe");
+    getLoggedInUser().then(value=>{
+      let email_header = document.getElementById("email_header")
+      email_header.innerHTML = "Email: " + value.email;
+    })
+  }
+
+ function setBookmarks(){
+    fetch(loggedInUser.links[1]['href'],{
+        credentials: 'include'
+         }) .then(response => response.json())
+         .then(data => {
+            for(const entry of data){
+                getMovie(entry['links'][0]['href'])
+                .then(response=>createMovieDetails(response));
+            }
+        });
+}
+
+
+async function getMovie(movie){
+     return await (await fetch(movie, {credentials:'include'})).json()
+}
+
+function createMovieDetails(movie){
+    fetch(`${baseUrl}i=${movie['id']}`)
+    .then(response=>response.json())
+    .then(data =>{
+        console.log(data)
+        const containerDiv = document.createElement('div');
+        containerDiv.classList.add('movie-details','results-container')
+        containerDiv.innerHTML = `
+        <p id="title"><span>${data['Title']}</span></p>
+                <div class="flex-container">
+                    <div class="mini-flex">
+                        <img id="poster" src="${data['Poster']}" width=200 alt="poster">
+                    </div>
+                    
+                    <div class="data">
+                        <div id="rating-flex">
+                            <div>
+                                <p id="imdbRating" style="font-size: 2rem;">&#x2605;<span>${data['imdbRating']}</span>/10</p>
+                            </div>
+                            <button id="like-btn-${data['imdbID']}" class="like-btn" onclick="toggle('${data['imdbID']}')">Unsave &#x2665;</button>
+                        </div>
+                        <p id="type">Type: <span>${data['Type']}</span></p>
+                        <p id="actors">Cast: <span>${data['Actors']}</span></p>
+                        <p id="released">Year: <span>${data['Year']}</span></p>
+                    </div>
+                </div>
+                <div id="plot-container">
+                    <p id="plot">Plot: <span id="plot-span">${data['Plot']}</span> </p>
+                    <a id="more-${data['imdbID']}" onclick="showMore(this,'${data['Title']}')">More</a>
+                </div>
+        `;
+        document.getElementById('bookmark-tab').appendChild(containerDiv);
+    })
+}
