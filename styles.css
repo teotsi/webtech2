@@ -1,3 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap');
+* {
+   font-family: 'Montserrat', sans-serif;
+}
 html,body{
   margin: 0;
 }
@@ -29,9 +33,13 @@ img{
     font-weight: 500;
 }
 
+
+[id^='more-']{
+    color: blue;
+}
+
 [id^='more-']:hover{
     cursor: pointer;
-    color: blue;
     text-decoration: underline;
 }
 
@@ -103,6 +111,7 @@ img{
 }
 
 .data{
+    width: 100%;
     padding: 20px;
     margin: auto;
     font-size: 1.4rem;
@@ -236,7 +245,7 @@ img{
    margin-bottom: 10px;
 }
 
-#submit-btn{
+.submit-btn{
     outline: none;
     border: none;
     background-color: transparent;
@@ -248,7 +257,8 @@ img{
     transition: ease-in-out .3s;
 }
 
-#submit-btn:hover{
+.submit-btn:hover{
+    cursor: pointer;
     transition: ease-in-out .15s;
     background-color: black;
     color: white;
@@ -319,7 +329,7 @@ img{
     }
 
     .data{
-        padding: 20px;
+        padding: 20px 0;
         margin: auto;
         font-size: 1.2rem;
     }

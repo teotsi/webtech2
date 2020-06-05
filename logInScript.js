@@ -8,4 +8,18 @@ async function getLoggedInUser(){
     return data;
 }
 
+function logout(){
+    fetch("http://localhost:8080/logout",{
+        credentials:"include"
+    }).then(response=>{
+        location.href="login.html"
+    })
+}
 
+function validateRegistration(){
+    let password = document.querySelector("#register-password");
+    let repeatPassword = document.querySelector("#repeat-password");
+
+   return password.value && password.value===repeatPassword.value        
+    
+}

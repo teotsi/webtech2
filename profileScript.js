@@ -1,6 +1,17 @@
+
 function loadData(){
-    setEmailInProfile();
-    setBookmarks();
+
+    getLoggedInUser()
+    .then(response=>{
+        console.log(response);
+        if(response.status){
+            console.log(response);
+            location.href="login.html"
+        }else{
+            setEmailInProfile();
+            setBookmarks();
+        }
+    });
 }
 
 function setEmailInProfile(){

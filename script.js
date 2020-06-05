@@ -17,7 +17,9 @@ const more = document.querySelector("#more");
 
 search.addEventListener('keyup', function () {
     clearTimeout(typingTimer);
-    typingTimer = setTimeout(showSearch, doneTypingInterval);
+    if(search.value.length){
+      typingTimer = setTimeout(showSearch, doneTypingInterval);
+    }
     
 });
 
@@ -54,28 +56,27 @@ function showSearch(){
     fetch(`${baseUrl}t=${search.value}`)
     .then(response=>response.json())
     .then(data=>{
-      resultsContainer.classList.remove("hidden");      
-      searchResults =data;
-      for(let i=0;i<textDetails.length;i++){
-          let currentElement = textDetails[i];
-          currentElement.innerText=searchResults[Object.keys(searchResults).find(key=>
-              key.toLowerCase()===currentElement.parentElement.id.toLowerCase())];
-      }
-      poster.src=searchResults["Poster"];
-      
-      if(loggedInUser){
-        let button = document.querySelector('.like-btn');
-        getMovie(`${loggedInUser['links'][1]['href']}/${searchResults['imdbID']}`)
-          .then(response =>{
-            if(response.status!==404){
-              button.textContent = 'Saved \u2665';
-            }else{
-              console.log(response.status)
-
-              button.textContent = 'Save \u2661';
-
-            }
-          });
+      if(!data.Error){
+        resultsContainer.classList.remove("hidden");      
+        searchResults =data;
+        for(let i=0;i<textDetails.length;i++){
+            let currentElement = textDetails[i];
+            currentElement.innerText=searchResults[Object.keys(searchResults).find(key=>
+                key.toLowerCase()===currentElement.parentElement.id.toLowerCase())];
+        }
+        poster.src=searchResults["Poster"];
+        
+        if(loggedInUser.id){
+          let button = document.querySelector('.like-btn');
+          getMovie(`${loggedInUser['links'][1]['href']}/${searchResults['imdbID']}`)
+            .then(response =>{
+              if(response.status!==404){
+                button.textContent = 'Saved \u2665';
+              }else{
+                button.textContent = 'Save \u2661';
+              }
+            });
+        }
       }
     });
 	
@@ -106,25 +107,29 @@ function logIn(username, password){
 }
 
 function register(){
-  const request = new XMLHttpRequest();
-  request.onload = () =>{
-    if(request.status == 200){
-      logIn(email, password)
-    }
-    console.log(request.responseText);
-  }
-
-  let email = document.querySelector('#register-email').value;
-  let password = document.querySelector('#register-password').value;
-
-  let registerData = {
-    "email":email,
-    "password":password
-  }
+  if(validateRegistration()){
+    let email = document.querySelector('#register-email').value;
+    let password = document.querySelector('#register-password').value;
   
-  request.open('put','http://localhost:8080/user/');
-  request.setRequestHeader("Content-Type", "application/json");
-  request.send(JSON.stringify(registerData));
+    let registerData = {
+      "email":email,
+      "password":password
+    }
+    fetch('http://localhost:8080/user/',{
+      method:'put',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(registerData),
+     }
+    ).then(response=>{
+        if(response.status == 200){
+          logIn(email, password)
+        }
+      })
+  }else{
+    console.log("faiiil")
+  }
 }
 
 function putMovie(){
@@ -188,11 +193,17 @@ if(id){
   button = document.querySelector('.like-btn');
 }
   const like = button.textContent;
-  if(like==whiteHeart) {
-    button.textContent = blackHeart;
-    putMovie();
-  } else {
-    button.textContent = whiteHeart;
-    removeMovie(id);
+  if(loggedInUser.id){
+    if(like==whiteHeart) {
+      button.textContent = blackHeart;
+      putMovie();
+    } else {
+      button.textContent = whiteHeart;
+      removeMovie(id);
+    }
+  }else{
+    location.href="login.html"
   }
+  
 }
+
