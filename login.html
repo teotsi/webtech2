@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Login Page</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body onload="redirectLoggedIn()">
+    <script src="authScript.js"></script>
+    <header>
+        <div class="grid-wrapper">
+            <h1 id="name"><a href="index.html" class="link">OMDb</a></h1>
+        </div>
+    </header>
+    <div class="grid-wrapper">
+        <h1 class="title-header" style="grid-column: 2/3; margin-bottom: 40px; text-align: center;">Search any movie or
+            series you want!</h1>
+        <div class="main-container">
+            <div class="flex-container tab">
+                <button class="tab-btn tablink active" id="login-btn"
+                    onclick="openTab(event, 'login-tab')">Login</button>
+                <button class="tab-btn tablink" id="create-acnt-btn" onclick="openTab(event, 'create-acnt-tab')">Create
+                    Account</button>
+            </div>
+            <div class="tabcontent active" style="display: block;" id="login-tab">
+                <h1 class="title-header" style="margin-bottom: 20px;">Login</h1>
+                <!-- Inputs
+                Email
+                Password -->
+                <div id="login-form">
+                    <p class="feedback hidden">Invalid credentials</p>
+                    <input autocomplete="off" id="login-email" type="email" class="email-input" name="username"
+                        placeholder="Email"> <br><br>
+                    <input id="login-password" type="password" name="password" class="pass-input"
+                        placeholder="Password"> <br><br>
+                    <button id="login-submit" class="submit-btn" onclick="logIn()" type="submit">Login</button>
+                </div>
+
+
+            </div>
+            <div class="tabcontent" id="create-acnt-tab">
+                <h1 class="title-header">Create An Account</h1>
+                <!-- Inputs
+                Email
+                Password 
+                Repeat Password-->
+                <p class="feedback hidden">Invalid credentials</p>
+                <input autocomplete="off" type="email" id="register-email" class="email-input" placeholder="Email">
+                <br><br>
+                <input type="password" id="register-password" class="pass-input" placeholder="Password"> <br><br>
+                <input type="password" oninput="checkPass()" class="pass-input" id="repeat-password"
+                    placeholder="Repeat Password"> <br><br>
+                <button id="register-submit" class="submit-btn" onclick="register()">Create</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="logInScript.js"></script>
+</body>
+
+</html>

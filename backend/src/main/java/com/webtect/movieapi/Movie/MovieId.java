@@ -1,0 +1,17 @@
+package com.webtect.movieapi.Movie;
+
+import com.webtect.movieapi.User.User;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+
+import java.io.Serializable;
+
+@AllArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode
+
+public class MovieId implements Serializable {
+    private String id;
+    private String user;
+}

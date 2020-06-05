@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <title>Profile Page</title>
+</head>
+<body onload="loadData()">
+<script th:src="@{/js/authScript.js}" ></script>
+
+<header>
+    <div class="grid-wrapper">
+        <h1 id="name"><a th:href="@{~/}"  class="link">OMDb</a></h1>
+    </div>
+</header>
+<div class="grid-wrapper">
+    <div class="main-container">
+        <div class="flex-container tab">
+            <button class="tab-btn tablink active" id="profile-btn" onclick="openTab(event, 'profile-tab')">Profile</button>
+            <button class="tab-btn tablink" id="bookmark-btn" onclick="openTab(event, 'bookmark-tab')">Bookmarks</button>
+        </div>
+        <div class="tabcontent" style="display: block;"id="profile-tab">
+            <h1>Profile</h1>
+            <h3 id="email_header">Email</h3>
+            <button onclick="logout()" class="submit-btn">logout</button>
+        </div>
+        <div class="tabcontent" id="bookmark-tab">
+            <h1>Bookmarked Movies</h1>
+        </div>
+    </div>
+</div>
+<script th:src="@{/js/profileScript.js}" ></script>
+<script th:src="@{/js/script.js}" ></script>
+</body>
+</html>

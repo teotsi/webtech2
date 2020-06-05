@@ -1,35 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
     <title>Search for movies!</title>
+    <script src="profileScript.js"></script>
 </head>
+
 <body>
+    <script src="authScript.js"></script>
+    <header>
+        <div class="grid-wrapperA">
+            <h1 id="name"><a href="index.html" class="link">OMDb</a></h1>
+            <div id="searchDiv">
+                <input autocomplete="off" type="search" name="search" id="search" placeholder="Search...">
+            </div>
+            <h1 id="profile"><a href="profile.html" class="link">Profile</a></h1>
+        </div>
+    </header>
     <div class="grid-wrapper">
         <div class="main-container">
-            <label for="search">Search</label>
-            <input type="search" name="search" id="search">
-            <h1>Results</h1>
-            <div class="results-container hidden">
-                <div class="movie-details">
-                    <h3 id="title"><span>Title</span></h3>
-                    <p id="year">Year: <span></span></p>
-                    <p id="type">Type: <span></span></p>
-                    <p id="actors">Actors: <span></span></p>
-                    <p id="released">Year: <span></span></p>
-                    <p id="imdbRating">IMDB Rating <span></span></p>
-                    <img id="poster" width=200 alt="poster">
-                    <p id="plot">Plot: <span id="plot-span"></span> </p>
-                    <a id="more" href="#">Περισσότερα</a>
+            <div class="movie-details results-container hidden">
+                <p id="title"><span>Title</span></p>
+                <div class="flex-container">
+                    <div class="mini-flex">
+                        <img id="poster" width=200 alt="poster" onerror="if (this.src != 'no-image.jpg') this.src = 'no-image.jpg';">
+                    </div>
 
+                    <div class="data">
+                        <div id="rating-flex">
+                            <div>
+                                <p id="imdbRating" style="font-size: 2rem;">&#x2605;<span></span>/10</p>
+                            </div>
+                            <button class="like-btn" onclick="toggle()">Save &#x2661;</button>
+                        </div>
+                        <p id="type">Type: <span></span></p>
+                        <p id="actors">Cast: <span></span></p>
+                        <p id="released">Year: <span></span></p>
+                    </div>
+                </div>
+                <div id="plot-container">
+                    <p id="plot">Plot: <span id="plot-span"></span><span id="full-plot-span" class="hidden"></span></p>
+                    <a id="more" onclick="toggleMore(this)" href="#">More</a>
                 </div>
             </div>
         </div>
-        
+
     </div>
 
     <script src="script.js"></script>
 </body>
+
 </html>
