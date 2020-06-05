@@ -3,6 +3,7 @@
 Simple Spring Boot API that utilizes [OMDB API](http://www.omdbapi.com/) to allow users to search for movies and save them in their personal account.
 
 This projects assumes that the backend DB is PostgreSQL. 
+There also a CORS Filter in place that currently allows requests from `localhost:5500` (as well as whatever address the server is running on).
 
 To use with PostgreSQL, you will need to `setx DB_PASS <password>` or `export DB_PASS=<password>`. (or just edit the whole `application.properties`).
 
