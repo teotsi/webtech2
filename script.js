@@ -65,7 +65,7 @@ function toggleMore(element, title) {
 }
 
 
-function showSearch() {
+showSearch = ()=> {
   search = document.querySelector("#search");
   console.log('searching!')
   fetch(`${baseUrl}t=${search.value}`)

@@ -1,31 +1,30 @@
-async function getLoggedInUser() {
+const getLoggedInUser = async () => {
 
     const response = await fetch("http://localhost:8080/user/me", {
         credentials: 'include'
     });
-    let data = await response.json()
-    return data;
-}
+    return await response.json();
+};
 
-function logout() {
+const logout = () => {
     fetch("http://localhost:8080/logout", {
         credentials: "include"
     }).then(response => {
         location.href = "/login/"
     })
-}
+};
 
-function validateRegistration() {
-    let password = document.querySelector("#register-password");
-    let repeatPassword = document.querySelector("#repeat-password");
+const validateRegistration = () => {
+    const password = document.querySelector("#register-password");
+    const repeatPassword = document.querySelector("#repeat-password");
 
     return password.value && password.value === repeatPassword.value
 
-}
+};
 
-function checkPass() {
-    let password = document.querySelector("#register-password");
-    let repeatPassword = document.querySelector("#repeat-password");
+const checkPass = () => {
+    const password = document.querySelector("#register-password");
+    const repeatPassword = document.querySelector("#repeat-password");
     if (password.value !== repeatPassword.value) {
         repeatPassword.style.color = repeatPassword.style.borderColor = "red"
     } else {
@@ -33,9 +32,6 @@ function checkPass() {
         repeatPassword.style.borderColor = "gray"
 
     }
-}
+};
 
-function validateEmail(email) {
-    return email.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)
-
-}
+const validateEmail = email => email.match(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/);

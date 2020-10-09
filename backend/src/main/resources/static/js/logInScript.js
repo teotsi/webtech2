@@ -13,7 +13,7 @@ for (const input of inputs) {
   });
 }
 
-function redirectLoggedIn() {
+const redirectLoggedIn = () => {
 
   getLoggedInUser()
     .then(response => {
@@ -21,4 +21,4 @@ function redirectLoggedIn() {
         location.href = "profile.html"
       }
     });
-}
+};

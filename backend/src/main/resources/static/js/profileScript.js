@@ -1,45 +1,14 @@
-function loadData() {
-
-    getLoggedInUser()
-        .then(response => {
-            console.log(response);
-            if (response.status) {
-                console.log(response);
-                location.href = "/login/"
-            } else {
-                setEmailInProfile();
-                setBookmarks();
-            }
-        });
-}
-
-function setEmailInProfile() {
+const setEmailInProfile = () => {
     getLoggedInUser().then(value => {
-        let email_header = document.getElementById("email_header")
-        email_header.innerHTML = "Email: " + value.email;
+        const email_header = document.getElementById("email_header");
+        email_header.innerHTML = `Email: ${value.email}`;
     })
-}
+};
+const getMovie = async movie => await (await fetch(movie, {
+    credentials: 'include'
+})).json();
 
-function setBookmarks() {
-    fetch(loggedInUser.links[1]['href'], {
-            credentials: 'include'
-        }).then(response => response.json())
-        .then(data => {
-            for (const entry of data) {
-                getMovie(entry['links'][0]['href'])
-                    .then(response => createMovieDetails(response));
-            }
-        });
-}
-
-
-async function getMovie(movie) {
-    return await (await fetch(movie, {
-        credentials: 'include'
-    })).json()
-}
-
-function createMovieDetails(movie) {
+const createMovieDetails = movie => {
     fetch(`${baseUrl}i=${movie['id']}`)
         .then(response => response.json())
         .then(data => {
@@ -51,7 +20,7 @@ function createMovieDetails(movie) {
         <p id="title"><span>${data['Title']}</span></p>
                 <div class="flex-container">
                     <div class="mini-flex">
-                        <img id="poster" src="${data['Poster']}" width=200 alt="poster" onerror="if (this.src != 'no-image.jpg') this.src = 'no-image.jpg';">
+                        <img id="poster" src="${data['Poster']}" width=200 alt="poster" onerror="if (this.src !== 'no-image.jpg') this.src = 'no-image.jpg';">
                     </div>
                     
                     <div class="data">
@@ -73,4 +42,31 @@ function createMovieDetails(movie) {
         `;
             document.getElementById('bookmark-tab').appendChild(containerDiv);
         })
-}
+};
+
+const setBookmarks = () => {
+    fetch(loggedInUser.links[1]['href'], {
+        credentials: 'include'
+    }).then(response => response.json())
+        .then(data => {
+            for (const entry of data) {
+                getMovie(entry['links'][0]['href'])
+                    .then(response => createMovieDetails(response));
+            }
+        });
+};
+
+const loadData = () => {
+
+    getLoggedInUser()
+        .then(response => {
+            console.log(response);
+            if (response.status) {
+                console.log(response);
+                location.href = "/login/"
+            } else {
+                setEmailInProfile();
+                setBookmarks();
+            }
+        });
+};

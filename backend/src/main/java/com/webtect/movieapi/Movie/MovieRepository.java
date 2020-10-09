@@ -9,8 +9,6 @@ import java.util.Optional;
 @Repository
 public interface MovieRepository extends JpaRepository<Movie, MovieId> {
     List<Movie> findByUserId(String userId);
-
     void deleteByUserIdAndId(String userId, String Id);
-
     Optional<Movie> findByIdAndUserId(String id, String userId);
 }
