@@ -13,12 +13,11 @@ for (const input of inputs) {
   });
 }
 
-function redirectLoggedIn() {
-
+const redirectLoggedIn = () => {
   getLoggedInUser()
     .then(response => {
       if (!response.status) {
         location.href = "profile.html"
       }
     });
-}
+};
