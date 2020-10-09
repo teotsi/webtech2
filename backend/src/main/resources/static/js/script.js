@@ -56,9 +56,7 @@ const toggleMore = async (element, title) => {
         fullPlotSpan.classList.toggle("hidden");
 
     }
-
 }
-
 
 const showSearch = () => {
     search = document.querySelector("#search");
@@ -194,7 +192,6 @@ const openTab = (evt, tabName) => {
     document.getElementById(tabName).style.display = "block";
     evt.currentTarget.classList.toggle("active");
 };
-
 
 const toggle = id => {
     const whiteHeart = 'Save \u2661';

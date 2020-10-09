@@ -22,7 +22,7 @@ const createMovieDetails = movie => {
                     <div class="mini-flex">
                         <img id="poster" src="${data['Poster']}" width=200 alt="poster" onerror="if (this.src !== 'no-image.jpg') this.src = 'no-image.jpg';">
                     </div>
-                    
+                 
                     <div class="data">
                         <div id="rating-flex">
                             <div>

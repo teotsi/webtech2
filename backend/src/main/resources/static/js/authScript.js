@@ -1,5 +1,4 @@
 const getLoggedInUser = async () => {
-
     const response = await fetch("http://localhost:8080/user/me", {
         credentials: 'include'
     });
@@ -17,7 +16,6 @@ const logout = () => {
 const validateRegistration = () => {
     const password = document.querySelector("#register-password");
     const repeatPassword = document.querySelector("#repeat-password");
-
     return password.value && password.value === repeatPassword.value
 
 };

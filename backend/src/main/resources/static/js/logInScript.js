@@ -14,7 +14,6 @@ for (const input of inputs) {
 }
 
 const redirectLoggedIn = () => {
-
   getLoggedInUser()
     .then(response => {
       if (!response.status) {

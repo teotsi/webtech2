@@ -68,7 +68,6 @@ public class MovieService {
     public HttpEntity<Movie> findByIdAndUserId(String movieId, String userId ) {
         Optional<Movie> movieOptional = repository.findByIdAndUserId(movieId, userId);
         movieOptional.orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND,"Not found"));
-
         Movie movie = movieOptional.get();
         movie.add(linkTo(methodOn(MovieController.class).getMovieById(userId,movieId)).withSelfRel());
         return new ResponseEntity<>(movie,HttpStatus.OK);

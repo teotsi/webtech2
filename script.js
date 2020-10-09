@@ -64,7 +64,6 @@ function toggleMore(element, title) {
 
 }
 
-
 showSearch = ()=> {
   search = document.querySelector("#search");
   console.log('searching!')
