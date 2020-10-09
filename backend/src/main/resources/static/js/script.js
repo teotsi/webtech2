@@ -43,7 +43,7 @@ const toggleMore = async (element, title) => {
     }
     let shortPlot = plotSpan.innerText;
     let anchor = plotSpan.parentElement.nextSibling.nextSibling;
-    if (ancor.innerText === "Less") {
+    if (anchor.innerText === "Less") {
         anchor.innerText = "More";
         plotSpan.classList.toggle("hidden");
         fullPlotSpan.classList.toggle("hidden");
